@@ -33,12 +33,12 @@ public class LoginPageTest {
         loginPage.find(loginInput).sendKeys(loginPage.getLogin());
         loginPage.find(passwordInput).sendKeys(loginPage.getPassword());
         loginPage.click(loginButton);
-        System.out.println(driver.getCurrentUrl());
-        driver.get("https://my.monkkee.com/#/entries");
-        System.out.println(driver.getCurrentUrl());
-        Thread.sleep(1000);
-       WebElement logOut = driver.findElement(By.xpath("//button[@class = 'user-menu-btn']"));
-       logOut.click();
+//        System.out.println(driver.getCurrentUrl());
+//        driver.get("https://my.monkkee.com/#/entries");
+//        System.out.println(driver.getCurrentUrl());
+//        Thread.sleep(1000);
+//       WebElement logOut = driver.findElement(By.xpath("//button[@class = 'user-menu-btn']"));
+//       logOut.click();
 
 
     }
