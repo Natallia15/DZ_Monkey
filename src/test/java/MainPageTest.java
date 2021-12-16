@@ -12,6 +12,10 @@ public class MainPageTest {
     MainPage mainPage;
     LoginPage loginPage;
 LoginPageTest loginPageTest;
+    LoginPage loginInput;
+    LoginPage passwordInput;
+    LoginPage loginButton;
+    MainPage addButton;
     private static final By logOutButton = By.xpath("/html/body/header/div[2]/div/div/div[2]/button");
 
     @BeforeTest
@@ -19,22 +23,21 @@ LoginPageTest loginPageTest;
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-//      loginPage = new LoginPage(driver);
-//      driver.get("https://my.monkkee.com/#/");
-//       Thread.sleep(3000);
-//        loginPage.find(loginInput).sendKeys(loginPage.getLogin());
-//        loginPage.find(passwordInput).sendKeys(loginPage.getPassword());
-//        loginPage.click(loginButton);
+      loginPage = new LoginPage(driver);
+     driver.get("https://my.monkkee.com/#/");
+      Thread.sleep(3000);
+       loginPage.find(loginInput).sendKeys(loginPage.getLogin());
+      loginPage.find(passwordInput).sendKeys(loginPage.getPassword());
+      loginPage.click(loginButton);
 
        driver.get("https://my.monkkee.com/#/entries");
         Thread.sleep(3000);
     }
 
     @Test
-    public void logOutTest(){
-        //loginPage.find(loginInput).sendKeys(loginPage.getLogin());
-        //loginPage.find(passwordInput).sendKeys(loginPage.getPassword());
-        mainPage.click(logOutButton);
+    public void addTest(){
+
+        mainPage.click(addButton);
 
        // WebElement logOut = driver.findElement(By.xpath("//button[@class='user-menu-btn][@ng-click='logout($event)']"));
        // logOut.click();

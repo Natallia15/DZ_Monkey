@@ -29,14 +29,16 @@ public class LoginPageTest {
     }
 
     @Test
-    public void loginTest(){
+    public void loginTest() throws InterruptedException {
         loginPage.find(loginInput).sendKeys(loginPage.getLogin());
         loginPage.find(passwordInput).sendKeys(loginPage.getPassword());
         loginPage.click(loginButton);
-        System.out.println(driver.getCurrentUrl());
-        driver.get("https://my.monkkee.com/#/entries");
-        System.out.println(driver.getCurrentUrl());
-       WebElement logOut = driver.findElement(By.xpath("//button[@class = 'user-menu-btn']"));
+//        System.out.println(driver.getCurrentUrl());
+//        driver.get("https://my.monkkee.com/#/entries");
+//        System.out.println(driver.getCurrentUrl());
+//        Thread.sleep(1000);
+//       WebElement logOut = driver.findElement(By.xpath("//button[@class = 'user-menu-btn']"));
+//       logOut.click();
 
 
     }
