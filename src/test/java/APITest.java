@@ -7,7 +7,7 @@ public class APITest
 {
    @Test
     public void first(){
-       given()
+      Root[] pets = given()
                .contentType(ContentType.JSON)
                .baseUri("https://petstore.swanger.io/v2")
                .when()
@@ -16,7 +16,10 @@ public class APITest
                //.statusCode(200)
                .body()
                //.prettyPrint();
-                .as(Root[])
+                .as(Root[].class);
+       for (int i=0; i<pets.length; i++){
+           System.out.println(pets[i].toJson());
+       }
     }
 
 
