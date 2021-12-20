@@ -20,7 +20,7 @@ public class HomePageTest {
     HomePage homePage;
     LoginPage loginPage;
     private static final By logOutButton = By.xpath("//button[@class = 'user-menu-btn']");
-    public static final By deleteButton = By.xpath("//a[@id='delete-entries']");
+   // public static final By deleteButton = By.xpath("//a[@id='delete-entries']");
     public static final By checkAllButton = By.xpath("//input[@ng-model='model.allChecked']");
 
     @BeforeTest
@@ -37,6 +37,8 @@ public class HomePageTest {
         loginPage.find(loginInput).sendKeys(loginPage.getLogin());
         loginPage.find(passwordInput).sendKeys(loginPage.getPassword());
         loginPage.click(loginButton);
+
+
 
     }
 
@@ -99,8 +101,8 @@ public class HomePageTest {
         //waitElement(HomePage.itemBodyList);
         //List<WebElement> elements = driver.findElements(HomePage.itemBodyList);
         //elements.forEach(WebElement::click);
-        waitElement(deleteButton);
-        homePage.click(deleteButton);
+        waitElement(homePage.deleteButton);
+        homePage.click(homePage.deleteButton);
         driver.switchTo().alert().accept();
 
     }

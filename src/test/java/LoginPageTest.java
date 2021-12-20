@@ -9,6 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -55,13 +56,25 @@ public class LoginPageTest {
     // названия раздела новостей
     @Test
     public void newsBlockTest () throws InterruptedException {
+
         WebElement element = driver.findElement(By.xpath("//div[@class='blog-article']//a"));
         String i = element.getText();
         System.out.println(i);
+
+        String startHandle = driver.getWindowHandle();
+
         element.click();
         Thread.sleep(3000);
+
+        ArrayList<String> handles = new ArrayList<>(driver.getWindowHandles());
+
+        String lastHandle = handles.get(1);
+
+        driver.switchTo().window(lastHandle);
+
+
         System.out.println(driver.getCurrentUrl());
-        driver.get("https://www.monkkee.com/en/eating-your-own-dog-food/");
+        //driver.get("https://www.monkkee.com/en/eating-your-own-dog-food/");
        // WebDriverWait wait = new WebDriverWait(driver, 10);
         //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='post-title']//h1")));
 //        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
