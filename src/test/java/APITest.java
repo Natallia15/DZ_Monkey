@@ -18,7 +18,7 @@ public class APITest
                //.prettyPrint();
                 .as(Root[].class);
        for (int i=0; i<pets.length; i++){
-           System.out.println(pets[i].toJson());
+          // System.out.println(pets[i].toJson());
        }
     }
 
