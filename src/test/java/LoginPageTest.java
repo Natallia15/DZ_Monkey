@@ -76,23 +76,20 @@ public class LoginPageTest {
 //                System.out.println(item.getAttribute("href")));
 //        list.forEach(WebElement::click);
 
-        String [] x = new String[list.size()];
-             for (int i=0; i<list.size(); i++) {
-            System.out.println(list.get(i).getAttribute("href"));
-            list.get(i).click();
-            x[i] = list.get(i).getAttribute("href");
-        }
-        System.out.println("ttttt");
+       String startHandle = driver.getWindowHandle();
 
-        ArrayList<String> handles = new ArrayList<>(driver.getWindowHandles());
-        for (int i=handles.size()-1, k=0; i>0; i--, k++){
-        //String lastHandle = handles.get(i);
-        driver.switchTo().window(handles.get(i));
-        System.out.println(driver.getCurrentUrl());
-                //Assert.assertEquals(driver.getCurrentUrl(),list.get(k).getAttribute("href"));
-          Assert.assertEquals(driver.getCurrentUrl(),x[k]);
-          driver.close();
-        }
+        list.forEach(item -> {
+            String expectedResult = item.getText();
+            item.click();
+            ArrayList<String> handles = new ArrayList<>(driver.getWindowHandles());
+            driver.switchTo().window(handles.get(1));
+            String actualResult = driver.findElement(By.xpath("/html/body/section[1]/div/div/div[1]/div[1]/div/div[1]/h1")).getText();
+            Assert.assertEquals(actualResult, expectedResult);
+            driver.close();
+            driver.switchTo().window(startHandle);
+
+        });
+
     }
 
     // ссылки из футера
