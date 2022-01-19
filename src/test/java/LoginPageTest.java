@@ -58,44 +58,23 @@ public class LoginPageTest {
     // названия раздела новостей
     @Test
     public void newsBlockTest () throws InterruptedException {
-
-       /* WebElement element = driver.findElement(By.xpath("//div[@class='blog-article']//a"));
-
+        ArrayList <WebElement> elements = new ArrayList<>(driver.findElements(By.xpath("//div[@class='blog-article']//a")));
         String startHandle = driver.getWindowHandle();
-        element.click();
-        Thread.sleep(3000);
-        ArrayList<String> handles = new ArrayList<>(driver.getWindowHandles());
+        elements.forEach (item -> {
+                String expectedResult = item.getText();
+                item.click();
+                ArrayList<String> handles = new ArrayList<>(driver.getWindowHandles());
         String lastHandle = handles.get(1);
         driver.switchTo().window(lastHandle);
-        System.out.println(driver.getCurrentUrl());*/
-
-       ArrayList<WebElement> list = new ArrayList<>(driver.findElements(By.xpath("//div[@class='blog-article']//a")));
-       // String startHandle = driver.getWindowHandle();
-//
-//        list.forEach(item ->
-//                System.out.println(item.getAttribute("href")));
-//        list.forEach(WebElement::click);
-
-        String [] x = new String[list.size()];
-             for (int i=0; i<list.size(); i++) {
-            System.out.println(list.get(i).getAttribute("href"));
-            list.get(i).click();
-            x[i] = list.get(i).getAttribute("href");
-        }
-        System.out.println("ttttt");
-
-        ArrayList<String> handles = new ArrayList<>(driver.getWindowHandles());
-        for (int i=handles.size()-1, k=0; i>0; i--, k++){
-        //String lastHandle = handles.get(i);
-        driver.switchTo().window(handles.get(i));
-        System.out.println(driver.getCurrentUrl());
-                //Assert.assertEquals(driver.getCurrentUrl(),list.get(k).getAttribute("href"));
-          Assert.assertEquals(driver.getCurrentUrl(),x[k]);
-          driver.close();
-        }
+                    String actualResult = driver.findElement(By.xpath("/html/body/section[1]/div/div/div[1]/div[1]/div/div[1]/h1")).getText();
+                    Assert.assertEquals(actualResult, expectedResult);
+                    driver.close();
+                    driver.switchTo().window(startHandle);
+        });
     }
 
-    // ссылки из футера
+
+    // ссылки из футера просто открываются
 @Test
 public void footerLinksTest () throws InterruptedException {
     List <WebElement> footerList = driver.findElements(By.xpath("//li[@class='footer-menu-item']"));
@@ -104,44 +83,34 @@ public void footerLinksTest () throws InterruptedException {
       footerList.forEach(WebElement::click);
 
 }
+// проверить ссылки футера, совпадают ли они с открывающимися вкладками
     @Test
     public void footerLinksTest2() throws InterruptedException {
         ArrayList <WebElement> footerList = new ArrayList<>(driver.findElements(By.xpath("//a[@class='footer-link']")));
         String startHandle = driver.getWindowHandle();
-        ArrayList<String> handles = new ArrayList<>();
-        for (WebElement footerElement : footerList) {
-            String x = footerElement.getAttribute("href");
-            System.out.println(x);
-            footerElement.click();
-            Thread.sleep(1000);
-            String h = driver.getWindowHandle();
-           handles.add(h);
+        footerList.forEach(item -> {
+            String expectedResult = item.getAttribute("href");
+            item.click();
+            ArrayList<String> handles = new ArrayList<>(driver.getWindowHandles());
+            String lastHandel = handles.get(1);
+            driver.switchTo().window(lastHandel);
+            String actualResult = driver.getCurrentUrl();
+            Assert.assertEquals(actualResult,expectedResult);
+            driver.close();
+            driver.switchTo().window(startHandle);
+        });
+
                    }
 
 
-for (int i=0; i<= handles.size(); i++){
-    System.out.println(handles.get(i));
-//    String hendel = handles.get(i);
-//    driver.switchTo().window(hendel);
-//   Assert.assertEquals(driver.getCurrentUrl(),x);
-}
-           // String lastHandle = handles.get(1);
-
-            //driver.switchTo().window(lastHandle);
-
-
-            System.out.println(driver.getCurrentUrl());
-
-          // Assert.assertEquals(driver.getCurrentUrl(),x);
-
-        }}
+    }
 
 
 
-//    private void waitElement(By locator){
-//        WebDriverWait wait = new WebDriverWait(driver, 10);
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));}
-//}
+
+
+
+
 
 
 

@@ -74,7 +74,7 @@ public class HomePageTest {
         homePage.click(logOutButton);
     }
 
-    // найти запись с нужным текстом
+    // найти запись на странице с нужным текстом - без встроенной стоки поиска
     @Test
     public void findMassage() throws InterruptedException {
         waitElement(HomePage.itemBodyList);
@@ -128,6 +128,71 @@ public class HomePageTest {
         homePage.click(homePage.deleteButton);
         driver.switchTo().alert().accept();
 
+    }
+
+
+    // удалить запись при помощи строки поиска
+   @Test
+    public void dellSearchMassage() throws InterruptedException {
+       // добавляем запись
+        waitElement(HomePage.addButton);
+       homePage.find(HomePage.addButton).click();
+       waitElement(HomePage.editableArea);
+       String testText = UUID.randomUUID().toString();
+       //String testText = "странно";
+       homePage.find(HomePage.editableArea).sendKeys(testText);
+       homePage.find(HomePage.homeButton).click();
+     //отправляем запись в строку поиска
+       Thread.sleep(1000);
+        WebDriverWait wait = new WebDriverWait(driver,20);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='appendedInputButton']")));
+        WebElement searchField = driver.findElement(By.xpath("//input[@id='appendedInputButton']"));
+       Thread.sleep(1000);
+        searchField.sendKeys(testText);
+        //searchField.submit();
+        String expectedResult = searchField.getText();
+        Thread.sleep(1000);
+       WebElement lupaButton = driver.findElement(By.xpath("//button[@Class='btn btn-primary input-group-addon']"));
+       lupaButton.click();
+       Thread.sleep(4000);
+       // проверяем её наличие
+       List <WebElement> list = driver.findElements(By.xpath("//div[@class='body ']"));
+       list.forEach(item ->{
+           String actualResult = item.getText();
+           Assert.assertTrue(actualResult.contains(testText));
+               });
+
+
+// удаляем записи, содержащие этот текст
+
+    }
+    @Test
+    public void SearchTest() throws InterruptedException {
+        //   driver.get("https://www.monkkee.com/en/blog/");
+        Thread.sleep(5000);
+        String text = "38f4277d-55f7-4782-b570-b2d08dfa2e0a";
+        WebElement element1 = driver.findElement(By.xpath("//*[@id=\"appendedInputButton\"]"));
+        element1.sendKeys(text);
+        element1.submit();
+        Thread.sleep(2000);
+        List<WebElement> list = driver.findElements(By.xpath("//div[@class='body ']"));
+        list.forEach(item -> {
+
+            String str = item.getText();
+            System.out.println(str);
+            Assert.assertTrue(str.contains(text));});
+
+    }
+
+    // переход по стрелкам
+    @Test
+    public void putMassage () throws InterruptedException {
+        waitElement(HomePage.itemBodyList);
+        homePage.find(HomePage.itemBodyList).click();
+        WebElement element1 = driver.findElement(By.xpath("//*[@id=\"main\"]/div/div[1]/div/div[1]/div/a[4]"));
+        element1.click();
+        WebElement element2 = driver.findElement(By.xpath("//*[@id=\"main\"]/div/div[1]/div/div[1]/div/a[5]/i"));
+        element2.click();
     }
 
     private void waitElement(By locator) {
