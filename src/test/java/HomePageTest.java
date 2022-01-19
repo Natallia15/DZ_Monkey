@@ -79,13 +79,8 @@ public class HomePageTest {
     public void findMassage() throws InterruptedException {
         waitElement(HomePage.itemBodyList);
         homePage.find(HomePage.itemBodyList);
-        //List<WebElement> zapisi = driver.findElements(HomePage.itemBodyList);
-       //div[@class='body ']
         String text = "Hi";
        List<WebElement> list = driver.findElements(By.xpath("//div[@class='body '][contains(text(),'" + text + "')]"));
-//       list.forEach(item - > {
-//               String str = item.getText;}
-//       );
         Assert.assertTrue(list.size()>0, "text is found");
 
     }

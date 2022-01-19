@@ -32,8 +32,6 @@ public class LoginPageTest {
 
         loginPage = new LoginPage(driver);
         driver.get("https://my.monkkee.com/#/");
-       // driver.get("https://www.monkkee.com/en/eating-your-own-dog-food/");
-
         Thread.sleep(3000);
     }
 
@@ -86,7 +84,7 @@ public void footerLinksTest () throws InterruptedException {
 // проверить ссылки футера, совпадают ли они с открывающимися вкладками
     @Test
     public void footerLinksTest2() throws InterruptedException {
-        ArrayList <WebElement> footerList = new ArrayList<>(driver.findElements(By.xpath("//a[@class='footer-link']")));
+        ArrayList<WebElement> footerList = new ArrayList<>(driver.findElements(By.xpath("//a[@class='footer-link']")));
         String startHandle = driver.getWindowHandle();
         footerList.forEach(item -> {
             String expectedResult = item.getAttribute("href");
@@ -95,37 +93,12 @@ public void footerLinksTest () throws InterruptedException {
             String lastHandel = handles.get(1);
             driver.switchTo().window(lastHandel);
             String actualResult = driver.getCurrentUrl();
-            Assert.assertEquals(actualResult,expectedResult);
+            Assert.assertEquals(actualResult, expectedResult);
             driver.close();
             driver.switchTo().window(startHandle);
         });
+    }}
 
-                   }
-
-
-for (int i=0; i<= handles.size(); i++){
-    System.out.println(handles.get(i));
-//    String hendel = handles.get(i);
-//    driver.switchTo().window(hendel);
-//   Assert.assertEquals(driver.getCurrentUrl(),x);
-}
-           // String lastHandle = handles.get(1);
-
-            //driver.switchTo().window(lastHandle);
-
-
-            System.out.println(driver.getCurrentUrl());
-
-          // Assert.assertEquals(driver.getCurrentUrl(),x);
-
-        }}
-
-
-
-//    private void waitElement(By locator){
-//        WebDriverWait wait = new WebDriverWait(driver, 10);
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));}
-//}
 
 
 
