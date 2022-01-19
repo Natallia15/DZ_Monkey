@@ -103,14 +103,29 @@ public void footerLinksTest () throws InterruptedException {
                    }
 
 
-    }
+for (int i=0; i<= handles.size(); i++){
+    System.out.println(handles.get(i));
+//    String hendel = handles.get(i);
+//    driver.switchTo().window(hendel);
+//   Assert.assertEquals(driver.getCurrentUrl(),x);
+}
+           // String lastHandle = handles.get(1);
+
+            //driver.switchTo().window(lastHandle);
+
+
+            System.out.println(driver.getCurrentUrl());
+
+          // Assert.assertEquals(driver.getCurrentUrl(),x);
+
+        }}
 
 
 
-
-
-
-
+//    private void waitElement(By locator){
+//        WebDriverWait wait = new WebDriverWait(driver, 10);
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));}
+//}
 
 
 
